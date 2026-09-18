@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web API Laboratory Activities</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        /* Animated Gradient for Navbar */
+        .navbar-custom {
+            background: linear-gradient(-45deg, #ff5100, #ff7b00, #ffae00, #e65c00);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar-custom .navbar-brand {
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .navbar-custom .nav-link:hover, 
+        .navbar-custom .nav-link.active {
+            color: #ffffff !important;
+        }
+
+        /* Activity Grid Custom Card Styles with Hover Effects */
+        .activity-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        }
+        /* Zoom and lift up on card hover */
+        .activity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(255, 123, 0, 0.15) !important;
+            border-color: #ffaa66;
+        }
+
+        .activity-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 12px;
+        }
+        .activity-card p {
+            color: #555555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Interactive Card Buttons with Sliding Icons */
+        .btn-custom {
+            background: linear-gradient(135deg, #ff7b00 0%, #ff9d00 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-custom i {
+            transition: transform 0.3s ease;
+        }
+        /* Push the icon to the right on hover */
+        .btn-custom:hover {
+            opacity: 0.95;
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
+        }
+        .btn-custom:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Interactive Big Center Button */
+        .btn-hero {
+            background: linear-gradient(135deg, #ff5100 0%, #ff7b00 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 81, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-hero i {
+            transition: transform 0.3s ease;
+        }
+        /* Make the rocket icon blast off upward on hover */
+        .btn-hero:hover {
+            background: linear-gradient(135deg, #e64c00 0%, #ff6f00 100%);
+            color: white;
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(255, 81, 0, 0.35);
+        }
+        .btn-hero:hover i {
+            transform: translate(2px, -3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-cpu-fill me-2"></i>Web API Laboratory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-house-door-fill me-1"></i>Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="github_api.html">GitHub API</a></li>
+                    <li class="nav-item"><a class="nav-link" href="local_storage.html">Local Storage</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map_api.html">Map API</a></li>
+                    <li class="nav-item"><a class="nav-link" href="user_preferences.html">User Preferences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="weather_api.html">Weather API</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Hero Header -->
+    <header class="container text-center my-5 py-4">
+        <h1 class="display-4 fw-bold text-dark mb-3">Web API Laboratory Activities</h1>
+        <p class="lead text-secondary mb-4 mx-auto" style="max-width: 700px;">
+            Explore the different web technologies and APIs implemented throughout our laboratory activities.
+        </p>
+        <button class="btn btn-hero">
+            Explore Activities <i class="bi bi-rocket-takeoff-fill"></i>
+        </button>
+    </header>
+
+    <!-- Sub-heading section -->
+    <section class="container text-center mb-5">
+        <h2 class="fw-bold text-dark mb-2">Laboratory Activities</h2>
+        <p class="text-secondary">Select an activity below to view and interact with it.</p>
+    </section>
+
+    <!-- Cards Layout Grid -->
+    <main class="container mb-5">
+        <div class="row g-4 justify-content-center">
+            
+            <!-- GitHub API Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="activity-card shadow-sm">
+                    <div>
+                        <h3><i class="bi bi-github me-2 text-dark"></i>GitHub API</h3>
+                        <p>Search for a GitHub user and display information such as their name, avatar, public repositories, and followers.</p>
+                    </div>
+                    <a href="github_api.html" class="btn btn-custom">Open GitHub API <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Local Storage Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="activity-card shadow-sm">
+                    <div>
+                        <h3><i class="bi bi-database-fill me-2 text-warning"></i>Local Storage</h3>
+                        <p>Learn how browser local storage can be used to save and retrieve user data without a server.</p>
+                    </div>
+                    <a href="local_storage.html" class="btn btn-custom">Open Local Storage <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Google Maps API Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="activity-card shadow-sm">
+                    <div>
+                        <h3><i class="bi bi-geo-alt-fill me-2 text-danger"></i>Google Maps API</h3>
+                        <p>Display an interactive Google Map using the Google Maps JavaScript API.</p>
+                    </div>
+                    <a href="map_api.html" class="btn btn-custom">Open Map API <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- User Preferences Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="activity-card shadow-sm">
+                    <div>
+                        <h3><i class="bi bi-sliders me-2 text-primary"></i>User Preferences</h3>
+                        <p>Save and apply user preferences such as theme and language using browser local storage.</p>
+                    </div>
+                    <a href="user_preferences.html" class="btn btn-custom">Open Preferences <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Weather API Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="activity-card shadow-sm">
+                    <div>
+                        <h3><i class="bi bi-cloud-sun-fill me-2 text-info"></i>Weather API</h3>
+                        <p>Search for a city and retrieve its current temperature and weather condition using a weather API.</p>
+                    </div>
+                    <a href="weather_api.html" class="btn btn-custom">Open Weather API <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://jsdelivr.net"></script>
+</body>
+</html>
+
