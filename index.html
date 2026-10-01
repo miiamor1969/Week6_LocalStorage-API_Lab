@@ -1,239 +1,944 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web API Laboratory Activities</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Bootstrap Icons CSS -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
+
+    <title>Web API Laboratory</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
     <style>
+
+        /* =========================
+           GENERAL
+        ========================== */
+
         body {
-            background-color: #ffffff;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-        
-        /* Animated Gradient for Navbar */
-        .navbar-custom {
-            background: linear-gradient(-45deg, #ff5100, #ff7b00, #ffae00, #e65c00);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .navbar-custom .navbar-brand {
-            font-weight: 600;
-            color: #ffffff;
-        }
-        .navbar-custom .nav-link {
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-        .navbar-custom .nav-link:hover, 
-        .navbar-custom .nav-link.active {
-            color: #ffffff !important;
-        }
-
-        /* Activity Grid Custom Card Styles with Hover Effects */
-        .activity-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 24px;
-            height: 100%;
+            background-color: #fffaf0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            background-color: #ffffff;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
         }
-        /* Zoom and lift up on card hover */
+
+        main {
+            flex: 1;
+        }
+
+
+        /* =========================
+           NAVIGATION BAR
+        ========================== */
+
+        .navbar {
+            background: linear-gradient(
+                90deg,
+                #f4511e,
+                #ff8f00,
+                #ffc107
+            );
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .navbar .nav-link {
+            color: white !important;
+            margin: 3px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.25);
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #e65100,
+                #ff6f00,
+                #ff9800,
+                #ffc107
+            );
+
+            color: white;
+            padding: 90px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            background: rgba(255,255,255,0.12);
+
+            border-radius: 50%;
+
+            top: -180px;
+            right: -80px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            background: rgba(255,255,255,0.08);
+
+            border-radius: 50%;
+
+            bottom: -150px;
+            left: -80px;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-shadow: 2px 3px 8px rgba(0,0,0,0.25);
+        }
+
+        .hero p {
+            text-shadow: 1px 2px 5px rgba(0,0,0,0.2);
+        }
+
+
+        /* =========================
+           BADGE
+        ========================== */
+
+        .hero .badge {
+            color: #e65100 !important;
+            background-color: white !important;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           HERO BUTTON
+        ========================== */
+
+        .hero .btn {
+            background-color: white;
+            color: #e65100;
+            border: none;
+
+            font-weight: bold;
+
+            padding: 12px 25px;
+
+            transition: 0.3s;
+        }
+
+        .hero .btn:hover {
+            background-color: #fff3cd;
+            color: #bf360c;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           ACTIVITY SECTION
+        ========================== */
+
+        #activities {
+            background: linear-gradient(
+                180deg,
+                #fffaf0,
+                #fff3d6
+            );
+        }
+
+
+        /* =========================
+           ACTIVITY CARDS
+        ========================== */
+
+        .activity-card {
+            height: 100%;
+
+            border: none;
+
+            border-top: 5px solid #ff9800 !important;
+
+            border-radius: 15px;
+
+            transition: all 0.3s ease;
+        }
+
         .activity-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(255, 123, 0, 0.15) !important;
-            border-color: #ffaa66;
+
+            box-shadow:
+                0 12px 30px
+                rgba(255, 152, 0, 0.25);
         }
 
-        .activity-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 12px;
-        }
-        .activity-card p {
-            color: #555555;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
 
-        /* Interactive Card Buttons with Sliding Icons */
-        .btn-custom {
-            background: linear-gradient(135deg, #ff7b00 0%, #ff9d00 100%);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            align-self: flex-start;
-            display: inline-flex;
+        /* =========================
+           ICON
+        ========================== */
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+
             align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .btn-custom i {
-            transition: transform 0.3s ease;
-        }
-        /* Push the icon to the right on hover */
-        .btn-custom:hover {
-            opacity: 0.95;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: linear-gradient(
+                135deg,
+                #ff6f00,
+                #ffc107
+            );
+
             color: white;
-            box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
-        }
-        .btn-custom:hover i {
-            transform: translateX(4px);
+
+            font-size: 28px;
+
+            box-shadow:
+                0 5px 15px
+                rgba(255, 152, 0, 0.3);
         }
 
-        /* Interactive Big Center Button */
-        .btn-hero {
-            background: linear-gradient(135deg, #ff5100 0%, #ff7b00 100%);
-            color: white;
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .btn-primary {
+            background: linear-gradient(
+                90deg,
+                #f4511e,
+                #ff9800
+            );
+
             border: none;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-size: 1.05rem;
+
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(255, 81, 0, 0.2);
-            transition: all 0.3s ease;
         }
-        .btn-hero i {
-            transition: transform 0.3s ease;
-        }
-        /* Make the rocket icon blast off upward on hover */
-        .btn-hero:hover {
-            background: linear-gradient(135deg, #e64c00 0%, #ff6f00 100%);
-            color: white;
+
+        .btn-primary:hover {
+            background: linear-gradient(
+                90deg,
+                #d84315,
+                #f57c00
+            );
+
             transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(255, 81, 0, 0.35);
         }
-        .btn-hero:hover i {
-            transform: translate(2px, -3px);
+
+
+        /* =========================
+           PRACTICE CARD
+        ========================== */
+
+        .practice-card {
+            background: linear-gradient(
+                135deg,
+                #e65100,
+                #ff6f00,
+                #ffb300
+            );
+
+            color: white;
+
+            border: none;
         }
+
+        .practice-card .icon-box {
+            background: white;
+            color: #f57c00;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: linear-gradient(
+                90deg,
+                #bf360c,
+                #e65100,
+                #ff8f00
+            );
+
+            color: white;
+        }
+
+        footer small {
+            color: #ffe0b2 !important;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+        }
+
     </style>
+
 </head>
+
+
 <body>
 
-    <!-- Top Navigation Bar -->
-    <nav class="navbar navbar-expand-md navbar-dark navbar-custom py-3 shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-cpu-fill me-2"></i>Web API Laboratory</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto gap-2">
-                    <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-house-door-fill me-1"></i>Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="github_api.html">GitHub API</a></li>
-                    <li class="nav-item"><a class="nav-link" href="local_storage.html">Local Storage</a></li>
-                    <li class="nav-item"><a class="nav-link" href="map_api.html">Map API</a></li>
-                    <li class="nav-item"><a class="nav-link" href="user_preferences.html">User Preferences</a></li>
-                    <li class="nav-item"><a class="nav-link" href="weather_api.html">Weather API</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Main Hero Header -->
-    <header class="container text-center my-5 py-4">
-        <h1 class="display-4 fw-bold text-dark mb-3">Web API Laboratory Activities</h1>
-        <p class="lead text-secondary mb-4 mx-auto" style="max-width: 700px;">
-            Explore the different web technologies and APIs implemented throughout our laboratory activities.
-        </p>
-        <button class="btn btn-hero">
-            Explore Activities <i class="bi bi-rocket-takeoff-fill"></i>
-        </button>
+    <!-- ==================================================
+         HEADER / NAVIGATION
+    =================================================== -->
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark shadow">
+
+            <div class="container">
+
+                <!-- BRAND -->
+
+                <a
+                    class="navbar-brand"
+                    href="index.html"
+                >
+
+                    <i class="bi bi-code-slash me-2"></i>
+
+                    Web API Laboratory
+
+                </a>
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavigation"
+                >
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
+                <!-- NAVIGATION LINKS -->
+
+                <div
+                    class="collapse navbar-collapse"
+                    id="mainNavigation"
+                >
+
+                    <ul class="navbar-nav ms-auto">
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link active"
+                                href="index.html"
+                            >
+
+                                <i class="bi bi-house me-1"></i>
+
+                                Home
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="github_api.html"
+                            >
+
+                                <i class="bi bi-github me-1"></i>
+
+                                GitHub API
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="local_storage.html"
+                            >
+
+                                <i class="bi bi-database me-1"></i>
+
+                                Local Storage
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="map_api.html"
+                            >
+
+                                <i class="bi bi-map me-1"></i>
+
+                                Map API
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="user_preferences.html"
+                            >
+
+                                <i class="bi bi-sliders me-1"></i>
+
+                                Preferences
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="weather_api.html"
+                            >
+
+                                <i class="bi bi-cloud-sun me-1"></i>
+
+                                Weather API
+
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
     </header>
 
-    <!-- Sub-heading section -->
-    <section class="container text-center mb-5">
-        <h2 class="fw-bold text-dark mb-2">Laboratory Activities</h2>
-        <p class="text-secondary">Select an activity below to view and interact with it.</p>
-    </section>
 
-    <!-- Cards Layout Grid -->
-    <main class="container mb-5">
-        <div class="row g-4 justify-content-center">
-            
-            <!-- GitHub API Card -->
-            <div class="col-md-6 col-lg-4">
-                <div class="activity-card shadow-sm">
-                    <div>
-                        <h3><i class="bi bi-github me-2 text-dark"></i>GitHub API</h3>
-                        <p>Search for a GitHub user and display information such as their name, avatar, public repositories, and followers.</p>
-                    </div>
-                    <a href="github_api.html" class="btn btn-custom">Open GitHub API <i class="bi bi-arrow-right"></i></a>
-                </div>
+
+    <!-- ==================================================
+         MAIN CONTENT
+    =================================================== -->
+
+    <main>
+
+
+        <!-- =========================
+             HERO SECTION
+        ========================== -->
+
+        <section class="hero">
+
+            <div class="container text-center">
+
+
+                <span class="badge rounded-pill px-3 py-2 mb-3">
+
+                    JavaScript & Web APIs
+
+                </span>
+
+
+                <h1>
+
+                    Web API Laboratory Activities
+
+                </h1>
+
+
+                <p class="lead mt-3">
+
+                    Explore the different web technologies and APIs
+                    implemented throughout our laboratory activities.
+
+                </p>
+
+
+                <a
+                    href="#activities"
+                    class="btn btn-lg mt-3"
+                >
+
+                    <i class="bi bi-arrow-down-circle me-2"></i>
+
+                    Explore Activities
+
+                </a>
+
+
             </div>
 
-            <!-- Local Storage Card -->
-            <div class="col-md-6 col-lg-4">
-                <div class="activity-card shadow-sm">
-                    <div>
-                        <h3><i class="bi bi-database-fill me-2 text-warning"></i>Local Storage</h3>
-                        <p>Learn how browser local storage can be used to save and retrieve user data without a server.</p>
-                    </div>
-                    <a href="local_storage.html" class="btn btn-custom">Open Local Storage <i class="bi bi-arrow-right"></i></a>
+        </section>
+
+
+
+        <!-- =========================
+             ACTIVITIES
+        ========================== -->
+
+        <section
+            id="activities"
+            class="py-5"
+        >
+
+            <div class="container">
+
+
+                <!-- TITLE -->
+
+                <div class="text-center mb-5">
+
+                    <h2 class="fw-bold">
+
+                        Laboratory Activities
+
+                    </h2>
+
+                    <p class="text-secondary">
+
+                        Select an activity below to view and interact with it.
+
+                    </p>
+
                 </div>
+
+
+
+                <!-- CARDS -->
+
+                <div class="row g-4">
+
+
+                    <!-- =========================
+                         GITHUB API
+                    ========================== -->
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card activity-card shadow-sm">
+
+                            <div class="card-body p-4">
+
+                                <div class="icon-box mb-3">
+
+                                    <i class="bi bi-github"></i>
+
+                                </div>
+
+
+                                <h3 class="h5 fw-bold">
+
+                                    GitHub API
+
+                                </h3>
+
+
+                                <p class="text-secondary">
+
+                                    Search for a GitHub user and display
+                                    information such as their name,
+                                    avatar, public repositories,
+                                    and followers.
+
+                                </p>
+
+
+                                <a
+                                    href="github_api.html"
+                                    class="btn btn-primary"
+                                >
+
+                                    Open GitHub API
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         LOCAL STORAGE
+                    ========================== -->
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card activity-card shadow-sm">
+
+                            <div class="card-body p-4">
+
+                                <div class="icon-box mb-3">
+
+                                    <i class="bi bi-database"></i>
+
+                                </div>
+
+
+                                <h3 class="h5 fw-bold">
+
+                                    Local Storage
+
+                                </h3>
+
+
+                                <p class="text-secondary">
+
+                                    Learn how browser local storage
+                                    can be used to save and retrieve
+                                    user data without a server.
+
+                                </p>
+
+
+                                <a
+                                    href="local_storage.html"
+                                    class="btn btn-primary"
+                                >
+
+                                    Open Local Storage
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         MAP API
+                    ========================== -->
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card activity-card shadow-sm">
+
+                            <div class="card-body p-4">
+
+                                <div class="icon-box mb-3">
+
+                                    <i class="bi bi-map"></i>
+
+                                </div>
+
+
+                                <h3 class="h5 fw-bold">
+
+                                    Google Maps API
+
+                                </h3>
+
+
+                                <p class="text-secondary">
+
+                                    Display an interactive Google Map
+                                    using the Google Maps JavaScript API.
+
+                                </p>
+
+
+                                <a
+                                    href="map_api.html"
+                                    class="btn btn-primary"
+                                >
+
+                                    Open Map API
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         USER PREFERENCES
+                    ========================== -->
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card activity-card shadow-sm">
+
+                            <div class="card-body p-4">
+
+                                <div class="icon-box mb-3">
+
+                                    <i class="bi bi-sliders"></i>
+
+                                </div>
+
+
+                                <h3 class="h5 fw-bold">
+
+                                    User Preferences
+
+                                </h3>
+
+
+                                <p class="text-secondary">
+
+                                    Save and apply user preferences
+                                    such as theme and language using
+                                    browser local storage.
+
+                                </p>
+
+
+                                <a
+                                    href="user_preferences.html"
+                                    class="btn btn-primary"
+                                >
+
+                                    Open Preferences
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         WEATHER API
+                    ========================== -->
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card activity-card shadow-sm">
+
+                            <div class="card-body p-4">
+
+                                <div class="icon-box mb-3">
+
+                                    <i class="bi bi-cloud-sun"></i>
+
+                                </div>
+
+
+                                <h3 class="h5 fw-bold">
+
+                                    Weather API
+
+                                </h3>
+
+
+                                <p class="text-secondary">
+
+                                    Search for a city and retrieve
+                                    its current temperature and weather
+                                    condition using a weather API.
+
+                                </p>
+
+
+                                <a
+                                    href="weather_api.html"
+                                    class="btn btn-primary"
+                                >
+
+                                    Open Weather API
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         WHAT YOU WILL LEARN
+                    ========================== -->
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card activity-card practice-card shadow-sm">
+
+                            <div class="card-body p-4">
+
+                                <div class="icon-box mb-3">
+
+                                    <i class="bi bi-code-slash"></i>
+
+                                </div>
+
+
+                                <h3 class="h5 fw-bold">
+
+                                    What You'll Practice
+
+                                </h3>
+
+
+                                <ul class="mt-3">
+
+                                    <li class="mb-2">
+                                        HTML Semantic Structure
+                                    </li>
+
+                                    <li class="mb-2">
+                                        Bootstrap Framework
+                                    </li>
+
+                                    <li class="mb-2">
+                                        JavaScript
+                                    </li>
+
+                                    <li class="mb-2">
+                                        Local Storage
+                                    </li>
+
+                                    <li class="mb-2">
+                                        Fetch API
+                                    </li>
+
+                                    <li>
+                                        External APIs
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
             </div>
 
-            <!-- Google Maps API Card -->
-            <div class="col-md-6 col-lg-4">
-                <div class="activity-card shadow-sm">
-                    <div>
-                        <h3><i class="bi bi-geo-alt-fill me-2 text-danger"></i>Google Maps API</h3>
-                        <p>Display an interactive Google Map using the Google Maps JavaScript API.</p>
-                    </div>
-                    <a href="map_api.html" class="btn btn-custom">Open Map API <i class="bi bi-arrow-right"></i></a>
-                </div>
-            </div>
+        </section>
 
-            <!-- User Preferences Card -->
-            <div class="col-md-6 col-lg-4">
-                <div class="activity-card shadow-sm">
-                    <div>
-                        <h3><i class="bi bi-sliders me-2 text-primary"></i>User Preferences</h3>
-                        <p>Save and apply user preferences such as theme and language using browser local storage.</p>
-                    </div>
-                    <a href="user_preferences.html" class="btn btn-custom">Open Preferences <i class="bi bi-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- Weather API Card -->
-            <div class="col-md-6 col-lg-4">
-                <div class="activity-card shadow-sm">
-                    <div>
-                        <h3><i class="bi bi-cloud-sun-fill me-2 text-info"></i>Weather API</h3>
-                        <p>Search for a city and retrieve its current temperature and weather condition using a weather API.</p>
-                    </div>
-                    <a href="weather_api.html" class="btn btn-custom">Open Weather API <i class="bi bi-arrow-right"></i></a>
-                </div>
-            </div>
-
-        </div>
     </main>
 
-    <!-- Bootstrap 5 JavaScript Bundle -->
-    <script src="https://jsdelivr.net"></script>
-</body>
-</html>
 
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+
+    <footer class="py-4">
+
+        <div class="container text-center">
+
+            <p class="mb-1 fw-bold">
+
+                Web API Laboratory Activities
+
+            </p>
+
+
+            <small>
+
+                Built with HTML, CSS, JavaScript, and Bootstrap 5
+
+            </small>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- Bootstrap JavaScript -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+</body>
+
+</html>
